@@ -1,10 +1,15 @@
 #!/usr/bin/env groovy
 
-def call(String repoName, String branch) {
+def call(String repoName, String branch, String dirName) {
     if (repoName == null || branch == null)
         throw new RuntimeException("Cannot fetch repo!")
 
-    git branch: "${branch}", changelog: false, poll: false, url: "${repoName}"
+    if (!fileExists dirName) {
+        new File(dirName).mkdir()
+    }
+    dir(dirName) {
+        git branch: "${branch}", changelog: false, poll: false, url: "${repoName}"
+    }
 
 //    withEnv(["REPO_NAME=${repoName}", "BRANCH=${branch}"]) {
 //        sh '''
