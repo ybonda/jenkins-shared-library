@@ -4,7 +4,8 @@ def call(String repoName, String branch, String dirName) {
     if (repoName == null || branch == null)
         throw new RuntimeException("Cannot fetch repo!")
 
-    if (!fileExists "${dirName}") {
+    def exists = fileExists dirName
+    if (!exists) {
         new File(dirName).mkdir()
     }
     dir(dirName) {
