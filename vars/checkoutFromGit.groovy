@@ -4,7 +4,7 @@ def call(String repoName, String branch) {
     if (repoName == null || branch == null)
         throw new RuntimeException("Cannot fetch repo!")
 
-    git branch: '${BRANCH}', changelog: false, poll: false, url: '${REPO_NAME}'
+    git branch: '${branch}', changelog: false, poll: false, url: '${repoName}'
 
 //    withEnv(["REPO_NAME=${repoName}", "BRANCH=${branch}"]) {
 //        sh '''
